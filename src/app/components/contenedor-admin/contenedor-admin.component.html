@@ -1,0 +1,91 @@
+<div class="w-full flex flex-col p-10 ">
+
+    <h1 class="text-center text-2xl font-bold">Nuevo producto</h1>
+
+    <br>
+
+    <form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-4">
+
+
+
+
+        <mat-form-field>
+            <mat-label>Nº de referencia:</mat-label>
+            <input formControlName="numReferencia" matInput placeholder="604133-139" required />
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Nombre del producto:</mat-label>
+            <input formControlName="nombreProducto" matInput placeholder="Nike Air Max Plus" required />
+            <mat-error *ngIf="productForm.get('nombreProducto')?.hasError('error')">
+                El nombre del producto ya existe.
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Precio (€):</mat-label>
+            <input formControlName="precio" matInput placeholder="100" required />
+            <mat-icon matSuffix>
+                <img src="icons/euro.png" class="w-[24px] h-[24px] mr-2">
+            </mat-icon>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Descripción:</mat-label>
+            <textarea formControlName="descripcion" matInput
+                placeholder="Ej. Deja que tu estilo se eleve..."></textarea>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Tipo de Producto:</mat-label>
+            <mat-select formControlName="tipoProducto">
+                @for (tipoProducto of listaTiposProductos; track $index) {
+                <mat-option [value]="tipoProducto">{{tipoProducto}}</mat-option>
+                }
+            </mat-select>
+        </mat-form-field>
+
+
+        <mat-checkbox formControlName="oferta" class="example-margin">Producto en oferta</mat-checkbox>
+
+
+        <div class="flex flex-col gap-4 mt-4 ">
+
+            <p>Imagen del producto:</p>
+
+            <div class="flex flex-row gap-4 items-center">
+                @if (imagenPreview) {
+                <img class="w-50 h-34 object-contain border border-black" [src]="imagenPreview">
+                }
+
+                <input type="file" (change)="onFileSelected($event)"
+                    class="h-10 border border-black px-4 py-2 rounded-full hover:bg-gray-300">
+                <input type="hidden" formControlName="imagen">
+
+                @if (subiendoImagen) {
+                <p>Subiendo imagen...</p>
+                }
+                @if (imagenSubida) {
+                <p>Imagen subida correctamente</p>
+                }
+
+            </div>
+
+
+        </div>
+
+        <br>
+
+        <button type="submit" class="border border-black px-4 py-2 rounded-full hover:bg-gray-300">Agregar
+            producto</button>
+        @if (this.productForm.invalid && productForm.touched) {
+        <label class="text-red-500">Compruebe los campos</label>
+        } @else {
+
+        }
+
+    </form>
+
+
+
+</div>

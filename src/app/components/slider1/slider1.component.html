@@ -1,0 +1,23 @@
+
+<div class="flex flex-col gap-4 p-10">
+
+    <div class="flex flex-row justify-between">
+        <h1 class="text-2xl">Lo mejor y más nuevo</h1>
+
+        <div class="flex flex-row items-center gap-4 text-2xl ">
+            <button class="w-12 y-10 rounded-full bg-gray-300 p-2 hover:bg-gray-500 transition duration-300">&lt;</button>
+            <button class="w-12 y-10 rounded-full bg-gray-300 p-2 hover:bg-gray-500 transition duration-300">&gt;</button>
+        </div>
+    </div>
+
+    <div class="flex flex-row gap-4 overflow-x-auto">
+        @if (listaNovedades) {
+            @for (novedad of listaNovedades; track $index) {
+                <app-item-slider1 [novedad]=novedad></app-item-slider1>
+            }
+        }
+    </div>
+    
+
+
+</div>
