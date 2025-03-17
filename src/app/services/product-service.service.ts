@@ -7,6 +7,9 @@ import { Producto } from '../interfaces/producto';
 export class ProductServiceService {
 
   listaProductos =  signal<Producto[]>([]);
+  	
+  
+
 
   //constructor() { }
 
@@ -25,6 +28,26 @@ export class ProductServiceService {
 
     return this.listaProductos;
 
+  }
+
+  anadirPrueba() {
+
+    const productoEjemplo: Producto = {
+      id: "12345",
+      nombre: "Zapatillas Deportivas",
+      tipoProducto: "Calzado",
+      descripcion: "Zapatillas deportivas cómodas y ligeras, ideales para correr.",
+      imagenes: [
+          "http://172.17.23.21:3000/uploads/1740908182832.jpg"
+      ],
+      precio: 79.99,
+      colores: ["Negro", "Blanco", "Azul"],
+      tallas: ["38", "39", "40", "41", "42"],
+      modelo: "RunnerX",
+      oferta: true
+  };
+
+    this.listaProductos.update(listaProductos => [...listaProductos, productoEjemplo]);
   }
 
 }

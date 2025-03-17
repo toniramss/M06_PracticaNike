@@ -1,11 +1,10 @@
-import { ChangeDetectionStrategy, Component, signal, Signal } from '@angular/core';
+import { Component, signal, Signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, FormGroup, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { merge } from 'rxjs';
+
 
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSelectModule } from '@angular/material/select';
@@ -30,9 +29,9 @@ export class ContenedorAdminComponent {
 
   listaProductos: Signal<Producto[]>;
 
-  imagenPreview: string | null = null; // Para mostrar la vista previa de la imagen
-  subiendoImagen: boolean = false; // Para indicar que la imagen se está subiendo
-  imagenSubida: boolean = false; // Para mostrar mensaje de éxito
+  imagenPreview: string | null = null;
+  subiendoImagen: boolean = false; 
+  imagenSubida: boolean = false;
 
 
   /* productService = new ProductServiceService(); */
@@ -44,6 +43,8 @@ export class ContenedorAdminComponent {
 
 
   constructor(private fb: FormBuilder, private productService: ProductServiceService, private http: HttpClient) {
+    
+    this.productService.anadirPrueba();
 
     this.listaProductos = this.productService.obtenerDatos();
 
@@ -113,13 +114,13 @@ export class ContenedorAdminComponent {
     const formData = new FormData();
     formData.append('image', file);
 
-    this.subiendoImagen = true; // Mostrar mensaje de carga
+    this.subiendoImagen = true;
 
-    this.http.post<{ fileName: string }>('http://192.168.1.133:3000/upload', formData)
+    this.http.post<{ fileName: string }>('http://172.16.31.88:3000/upload', formData)
       .subscribe({
         next: (response) => {
-          const imageUrl = `http://192.168.1.133:3000/uploads/${response.fileName}`;
-          this.productForm.patchValue({ imagen: imageUrl }); // Guardar la URL en el formulario
+          const imageUrl = `http://172.16.31.88:3000/uploads/${response.fileName}`;
+          this.productForm.patchValue({ imagen: imageUrl }); 
           this.subiendoImagen = false;
           this.imagenSubida = true;
         },

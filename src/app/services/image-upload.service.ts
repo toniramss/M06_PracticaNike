@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class ImageUploadService {
 
-  private apiUrl = 'http://localhost:3000/upload'; // La URL de tu servidor Express
+  private apiUrl = 'http://localhost:3000/upload';
 
   constructor(private http: HttpClient) { }
 

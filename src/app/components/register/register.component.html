@@ -1,0 +1,42 @@
+<div class="flex flex-col items-center justify-center p-10">
+
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-4">
+
+        <mat-form-field>
+            <mat-label>Nombre:</mat-label>
+            <input type="text" formControlName="nombre" matInput required />
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Contraseña:</mat-label>
+            <input type="password" formControlName="contrasenya" matInput required />
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Repite la contraseña:</mat-label>
+            <input type="password" formControlName="repiteContrasenya" matInput required />
+        </mat-form-field>
+
+        @if (registerForm.hasError('passwordMismatch') && registerForm.touched) {
+            <p>Las contraseñas no coinciden</p>
+        }
+
+        <mat-form-field>
+            <mat-label>Email:</mat-label>
+            <input type="password" formControlName="email" matInput required />
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Teléfono:</mat-label>
+            <input type="password" formControlName="telefono" matInput />
+        </mat-form-field>
+
+        <button type="submit" class="border border-black px-4 py-2 rounded-full hover:bg-gray-300">
+            Register
+        </button>
+
+
+
+    </form>
+
+</div>
