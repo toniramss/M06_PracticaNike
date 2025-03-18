@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormBuilder, FormGroup, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-
+import { Register } from '../../interfaces/register';
+import { postRegister } from '../../BDManagement/APIResquests';
 
 @Component({
   selector: 'app-register',
@@ -42,7 +43,7 @@ export class RegisterComponent {
       }
   
   
-      const register = {
+      const register: Register = {
         email: this.registerForm.value.email,
         contrasenya: this.registerForm.value.contrasenya,
         nombre: this.registerForm.value.nombre,
@@ -52,7 +53,7 @@ export class RegisterComponent {
 
 
       //Llamar a la api para hacer register
-        
+      postRegister(register);
   
     }
 

@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormBuilder, FormGroup, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Login } from '../../interfaces/login';
+import { postLogin } from '../../BDManagement/APIResquests';
 
 
 @Component({
@@ -36,13 +38,15 @@ export class LoginComponent {
       }
   
   
-      const login = {
+      const login: Login = {
         email: this.loginForm.value.email,
         contrasenya: this.loginForm.value.contrasenya,
       };
 
 
       //Llamar a la api para hacer login
+      postLogin(login);
+      
         
   
     }

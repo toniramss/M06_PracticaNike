@@ -149,7 +149,7 @@ export class ContenedorAdminComponent {
       nombre: this.productForm.value.nombreProducto,
       tipoProducto: this.productForm.value.tipoProducto,
       descripcion: this.productForm.value.descripcion,
-      imagenes: [this.productForm.value.imagen],
+      imagenes: this.productForm.value.imagen,
       precio: this.productForm.value.precio,
       colores: [this.productForm.value.colores],
       tallas: [this.productForm.value.tallas],

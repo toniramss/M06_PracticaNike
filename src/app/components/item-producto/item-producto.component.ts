@@ -13,7 +13,7 @@ export class ItemProductoComponent {
     nombre: "",
     tipoProducto: "",
     descripcion: "",
-    imagenes: [],
+    imagenes: "",
     precio: 0,
     colores: [],
     tallas: [],

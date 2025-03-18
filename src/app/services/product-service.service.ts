@@ -1,14 +1,15 @@
 import { Injectable, Signal, signal } from '@angular/core';
 import { Producto } from '../interfaces/producto';
+import { getProductos } from '../BDManagement/APIResquests';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductServiceService {
 
-  listaProductos =  signal<Producto[]>([]);
-  	
-  
+  listaProductos = signal<Producto[]>([]);
+
+
 
 
   //constructor() { }
@@ -37,17 +38,26 @@ export class ProductServiceService {
       nombre: "Zapatillas Deportivas",
       tipoProducto: "Calzado",
       descripcion: "Zapatillas deportivas cómodas y ligeras, ideales para correr.",
-      imagenes: [
-          "http://172.17.23.21:3000/uploads/1740908182832.jpg"
-      ],
+      imagenes: "http://172.17.23.21:3000/uploads/1740908182832.jpg",
       precio: 79.99,
       colores: ["Negro", "Blanco", "Azul"],
       tallas: ["38", "39", "40", "41", "42"],
       modelo: "RunnerX",
       oferta: true
-  };
+    };
 
     this.listaProductos.update(listaProductos => [...listaProductos, productoEjemplo]);
+  }
+  
+  async ngOnInit() {
+
+    try {
+      const productos = await getProductos();
+      this.listaProductos.set(productos);
+    } catch (error) {
+      console.log("Error al obtener productos: ", error);
+    }
+
   }
 
 }
