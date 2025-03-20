@@ -1,4 +1,5 @@
 import { Injectable, Signal, signal } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Producto } from '../interfaces/producto';
 import { getProductos } from '../BDManagement/APIResquests';
 
@@ -7,12 +8,16 @@ import { getProductos } from '../BDManagement/APIResquests';
 })
 export class ProductServiceService {
 
-  listaProductos = signal<Producto[]>([]);
+  private apiURL = "http://localhost:3000/";
+
+  private listaProductos = signal<Producto[]>([]);
 
 
+  constructor(private http: HttpClient) {}
 
-
-  //constructor() { }
+  get productos(): Signal<Producto[]> {
+    return this.listaProductos.asReadonly();
+  }
 
   agregarDato(producto: Producto) {
 
@@ -31,7 +36,22 @@ export class ProductServiceService {
 
   }
 
-  anadirPrueba() {
+  loadProductos() {
+    this.http.get<Producto[]>(this.apiURL + "getProductos").subscribe({
+      next: (data) => this.listaProductos.set(data),
+      error: (error) => console.error("Error al cargar productos: ", error),
+    });
+  }
+  addProducto(producto: Producto) {
+    this.http.post<Producto>(this.apiURL + "postCreateProducto", producto).subscribe({
+      next: (newProducto) => this.listaProductos.update((productos) => [...productos, newProducto]),
+      error: (error) => console.error("Error al añadir producto: ", error),
+    })
+  }
+
+
+
+  /* anadirPrueba() {
 
     const productoEjemplo: Producto = {
       id: "12345",
@@ -48,8 +68,8 @@ export class ProductServiceService {
 
     this.listaProductos.update(listaProductos => [...listaProductos, productoEjemplo]);
   }
-  
-  async ngOnInit() {
+   */
+  /* async ngOnInit() {
 
     try {
       const productos = await getProductos();
@@ -58,6 +78,6 @@ export class ProductServiceService {
       console.log("Error al obtener productos: ", error);
     }
 
-  }
+  } */
 
 }

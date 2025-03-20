@@ -44,7 +44,7 @@ export class ContenedorAdminComponent {
 
   constructor(private fb: FormBuilder, private productService: ProductServiceService, private http: HttpClient) {
     
-    this.productService.anadirPrueba();
+    //this.productService.anadirPrueba();
 
     this.listaProductos = this.productService.obtenerDatos();
 

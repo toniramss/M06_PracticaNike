@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Producto } from '../../interfaces/producto';
+import { CestaService } from '../../services/cesta.service';
 
 @Component({
   selector: 'app-item-producto',
@@ -20,4 +21,15 @@ export class ItemProductoComponent {
     modelo: "",
     oferta: false,
   };
+
+  constructor(private cestaService: CestaService) {}
+
+  addToCart(producto: Producto) {
+    console.log("Producto añadido al carrito");
+
+    this.cestaService.agregarProductoACesta(producto);
+
+
+
+  }
 }

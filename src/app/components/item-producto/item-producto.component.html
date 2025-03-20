@@ -1,14 +1,16 @@
 <div >
-    <img class="w-[20rem] h-[25rem] object-contain" [src]=producto.imagenes[0]>
+    <img class="w-[20rem] h-[25rem] object-contain" [src]=producto.imagenes>
 
     <div class="flex flex-col p-2">
         <p class="font-bold">{{ producto.nombre }}</p>
 
         <p> {{ producto.tipoProducto }}</p>
 
-        <p> {{ producto.colores.length }} colores</p>
-
+<!--         <p> {{ producto.colores.length }} colores</p>
+ -->
         <p class="font-bold mt-2"> {{ producto.precio }} €</p>
+
+        <button class="w-full px-4 py-2 bg-gray-400 rounded-lg mt-4 hover:bg-gray-300" (click)="addToCart(producto)">Añadir a la cesta</button>
     </div>
 
 </div>
