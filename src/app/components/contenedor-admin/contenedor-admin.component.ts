@@ -145,23 +145,17 @@ export class ContenedorAdminComponent {
 
 
     const producto: Producto = {
-      id: crypto.randomUUID(),
+      id: 0,
       nombre: this.productForm.value.nombreProducto,
       tipoProducto: this.productForm.value.tipoProducto,
       descripcion: this.productForm.value.descripcion,
       imagenes: this.productForm.value.imagen,
       precio: this.productForm.value.precio,
-      colores: [this.productForm.value.colores],
-      tallas: [this.productForm.value.tallas],
       modelo: this.productForm.value.numReferencia,
       oferta: this.productForm.value.oferta,
     };
 
     this.productService.agregarDato(producto);
-
-
-
-
 
   }
 

@@ -19,7 +19,7 @@ export class CestaService {
     this.listaProductosCesta.update(listaProductosCesta => [...listaProductosCesta, producto]);
     console.log("Producto agregado a la cesta: ", this.listaProductosCesta()[this.listaProductosCesta().length - 1]);
 
-    console.log("Lista de productos: ", this.obtenerProductosCesta()());
+    console.log("Lista de productos cesta service: ", this.obtenerProductosCesta()());
 
     alert("Producto añadido a la cesta");
 

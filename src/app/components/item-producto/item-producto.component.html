@@ -11,6 +11,10 @@
         <p class="font-bold mt-2"> {{ producto.precio }} €</p>
 
         <button class="w-full px-4 py-2 bg-gray-400 rounded-lg mt-4 hover:bg-gray-300" (click)="addToCart(producto)">Añadir a la cesta</button>
+        
+        @if (tipoUsuarioIniciado === 'a') {
+            <button class="w-full px-4 py-2 bg-red-400 rounded-lg mt-4 hover:bg-gray-300" (click)="eliminarProducto(producto.id)">Eliminar producto</button>
+        }
     </div>
 
 </div>

@@ -49,9 +49,17 @@ export class LoginComponent {
       const response = await postLogin(login);
       console.log("Respuesta login:", response);
 
+      if (response.user.rol === 'a') {
+        console.log("usuario administrador");
+      } else {
+        console.log("Usuario normal");
+      }
+
       sessionStorage.setItem("token", response.token);
       sessionStorage.setItem("user", response.user);
       sessionStorage.setItem("idUsuario", response.user.idUsuario);
+      sessionStorage.setItem("tipoUsuario", response.user.rol);
+
 
       this.router.navigate(["/home"]);
 

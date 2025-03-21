@@ -14,7 +14,9 @@ import { CestaService } from '../../services/cesta.service';
 })
 export class NavbarComponentComponent {
 
-  aparecerAdmin: Boolean = false;
+  tipoUsuarioIniciado = 'n';
+  //sessionStorage.getItem("tipoUsuario") || 'n';
+
   mostrarDialogoCesta: Boolean = false;
   listaProductosCesta: Signal<Producto[]>;
 
@@ -25,7 +27,9 @@ export class NavbarComponentComponent {
   constructor(private productService: ProductServiceService, private cestaService: CestaService) {
     this.listaProductos = this.productService.obtenerDatos();  // Obtener la lista de productos
     this.filteredProductos = this.listaProductos();  // Inicializar la lista filtrada con todos los productos
-    this.listaProductosCesta = this.cestaService.productosCesta;
+    this.listaProductosCesta = this.cestaService.obtenerProductosCesta();
+
+    console.log("Lista productos cesta: ", this.listaProductosCesta());
   }
 
   // La función de búsqueda
@@ -40,10 +44,9 @@ export class NavbarComponentComponent {
 
   showCart() {
     this.mostrarDialogoCesta = !this.mostrarDialogoCesta;
+
+    console.log("Lista cesta: ", this.listaProductosCesta());
   }
 
-  ngOnInit() {
-    this.aparecerAdmin = sessionStorage.getItem("user") === "a"; 
-  }
 
 }

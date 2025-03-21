@@ -48,6 +48,21 @@ export class ProductServiceService {
       error: (error) => console.error("Error al añadir producto: ", error),
     })
   }
+  deleteProducto(id: number) {
+    this.http.delete<Producto>(`${this.apiURL}deleteProducto/${id}`).subscribe({
+      next: () => {
+        // Actualizar la lista de productos después de eliminar
+        this.listaProductos.update((productos) => productos.filter((producto) => producto.id !== id));
+        console.log("Producto eliminado con éxito");
+  
+        alert("Producto eliminado con éxito");
+      },
+      error: (error) => {
+        console.error("Error al eliminar producto: ", error);
+        alert("Error al eliminar producto");
+      },
+    });
+  }
 
 
 

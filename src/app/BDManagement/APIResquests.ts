@@ -3,6 +3,7 @@ import { Login } from "../interfaces/login";
 import { Register } from "../interfaces/register";
 import { PedidoApi } from "../interfaces/pedidosApi";
 import { PostPedidosApi } from "../interfaces/postPedidosApi";
+import { ProductoPedido } from "../interfaces/productoPedido";
 
 
 const API_URL = "http://localhost:3000/";
@@ -70,6 +71,31 @@ export async function getProductos() {
     listProductos = await response.json();
 
     return listProductos;
+
+}
+
+export async function getProductoId(id: Number) {
+
+    let producto: Producto = {
+        id: 0,
+        nombre: "",
+        tipoProducto: "",
+        descripcion: "",
+        imagenes: "",
+        precio: 0,
+        modelo: "",
+        oferta: false
+    };
+
+    const response = await fetch(API_URL + 'getProducto/' + id);
+
+    if (!response.ok) {
+        throw new Error('Error al obtener los productos');
+    }
+
+    producto = await response.json();
+
+    return producto;
 
 }
 
@@ -185,6 +211,8 @@ export async function getPedidos(id: Number) {
 
     let listaPedidos: PedidoApi[] = [];
 
+    console.log(API_URL + 'getPedidos/' + id);
+
     const response = await fetch(API_URL + 'getPedidos/' + id);
 
     if (!response.ok) {
@@ -198,7 +226,7 @@ export async function getPedidos(id: Number) {
 }
 
 export async function getProductosPedido(idPedido: Number) {
-    
+
     let listaProductosPedido = [];
 
     const response = await fetch(API_URL + 'getProductosPedido/' + idPedido);

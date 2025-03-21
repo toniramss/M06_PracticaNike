@@ -1,8 +1,8 @@
 import { Component, OnInit, Signal } from '@angular/core';
 import { MisPedidosService } from '../../services/mis-pedidos.service';
 import { ProductoPedido } from '../../interfaces/productoPedido';
-import { getPedidos, getProductosPedido } from '../../BDManagement/APIResquests';
-
+import { getPedidos, getProductoId, getProductosPedido } from '../../BDManagement/APIResquests';
+import { Producto } from '../../interfaces/producto';
 
 @Component({
   selector: 'app-mis-pedidos',
@@ -26,15 +26,24 @@ export class MisPedidosComponent implements OnInit {
     //this.pedidoService.loadPedidos();
     const listaPedidos = await getPedidos(this.idUsuarioLogIn);
 
+    console.log("listaPedidos", listaPedidos);
+
     for (let i = 0; i < listaPedidos.length; i++) {
       const element = listaPedidos[i];
 
       const listaProductosPedido = await getProductosPedido(element.id);
 
-      const listaProductos: Number[] = [];
+      const listaProductos: Producto[] = [];
+
       for (let i = 0; i < listaProductosPedido.length; i++) {
         const element = listaProductosPedido[i];
-        listaProductos.push(element.idProducto);
+
+
+        let producto = await getProductoId(element.idProducto);
+
+        console.log("producto", producto);
+
+        listaProductos.push(producto);
       }
       
       const objetoPedido: ProductoPedido = {
@@ -43,9 +52,14 @@ export class MisPedidosComponent implements OnInit {
         listaProductos: listaProductos
       }
 
+
+  
+
       this.listaPedidos.push(objetoPedido);
       
     }
+
+    console.log("this.listaPedidos", this.listaPedidos);
 
     
     

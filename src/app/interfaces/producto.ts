@@ -1,12 +1,10 @@
 export interface Producto {
-    id: string;
+    id: number;
     nombre: string;
     tipoProducto: string;
     descripcion: string;
     imagenes: string;
     precio: number;
-    colores: string[];
-    tallas: string[];
     modelo: string;
     oferta: boolean;
 }
