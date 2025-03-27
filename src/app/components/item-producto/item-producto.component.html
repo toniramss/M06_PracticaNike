@@ -1,4 +1,4 @@
-<div >
+<div>
     <img class="w-[20rem] h-[25rem] object-contain" [src]=producto.imagenes>
 
     <div class="flex flex-col p-2">
@@ -6,15 +6,23 @@
 
         <p> {{ producto.tipoProducto }}</p>
 
-<!--         <p> {{ producto.colores.length }} colores</p>
+        <!--         <p> {{ producto.colores.length }} colores</p>
  -->
         <p class="font-bold mt-2"> {{ producto.precio }} €</p>
 
-        <button class="w-full px-4 py-2 bg-gray-400 rounded-lg mt-4 hover:bg-gray-300" (click)="addToCart(producto)">Añadir a la cesta</button>
-        
-        @if (tipoUsuarioIniciado === 'a') {
-            <button class="w-full px-4 py-2 bg-red-400 rounded-lg mt-4 hover:bg-gray-300" (click)="eliminarProducto(producto.id)">Eliminar producto</button>
+        <p>Stock: {{ producto.stock }} </p>
+
+        @if (producto.stock <= 0) { 
+            <button class="w-full px-4 py-2 bg-gray-200 rounded-lg mt-4">Añadir a la cesta</button>
+        } @else {
+            <button class="w-full px-4 py-2 bg-gray-400 rounded-lg mt-4 hover:bg-gray-300"
+            (click)="addToCart(producto)">Añadir a la cesta</button>
         }
+
+            @if (tipoUsuarioIniciado === 'a') {
+            <button class="w-full px-4 py-2 bg-red-400 rounded-lg mt-4 hover:bg-gray-300"
+                (click)="eliminarProducto(producto.id)">Eliminar producto</button>
+            }
     </div>
 
 </div>

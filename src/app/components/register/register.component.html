@@ -1,6 +1,10 @@
 <div class="flex flex-col items-center justify-center p-10">
 
-    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-4">
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-4 p-10 rounded-xl bg-gray-300">
+
+        <h1 class="w-full text-4xl text-center">Register</h1>
+
+        <img class="w-50" src="/images/nike.png">
 
         <mat-form-field>
             <mat-label>Nombre:</mat-label>
@@ -23,15 +27,15 @@
 
         <mat-form-field>
             <mat-label>Email:</mat-label>
-            <input type="password" formControlName="email" matInput required />
+            <input type="email" formControlName="email" matInput required />
         </mat-form-field>
 
         <mat-form-field>
             <mat-label>Teléfono:</mat-label>
-            <input type="password" formControlName="telefono" matInput />
+            <input type="tel" formControlName="telefono" matInput />
         </mat-form-field>
 
-        <button type="submit" class="border border-black px-4 py-2 rounded-full hover:bg-gray-300">
+        <button type="submit" class="border border-black px-4 py-2 rounded-full hover:bg-white">
             Register
         </button>
 

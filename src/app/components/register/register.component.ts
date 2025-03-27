@@ -4,6 +4,8 @@ import { MatInputModule } from '@angular/material/input';
 import { FormBuilder, FormGroup, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Register } from '../../interfaces/register';
 import { postRegister } from '../../BDManagement/APIResquests';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-register',
@@ -15,7 +17,7 @@ export class RegisterComponent {
 
   registerForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private router: Router) {
 
     this.registerForm = this.fb.group({
       nombre: ['', Validators.required],
@@ -54,6 +56,10 @@ export class RegisterComponent {
 
       //Llamar a la api para hacer register
       postRegister(register);
+
+      alert("El usuario se ha creado correctamente");
+
+      this.router.navigate(["/login"]);
   
     }
 

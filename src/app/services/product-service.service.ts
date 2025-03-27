@@ -64,6 +64,14 @@ export class ProductServiceService {
     });
   }
 
+  restarStock() {
+    
+
+  }
+  restablecerStock() {
+
+  }
+
 
 
   /* anadirPrueba() {

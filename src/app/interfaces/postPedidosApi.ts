@@ -1,4 +1,4 @@
 export interface PostPedidosApi {
-    idUsuario: Number,
-    productos: Number[]
+    idUsuario: number,
+    productos: number[]
 }

@@ -1,5 +1,6 @@
 import { Injectable, Signal, signal } from '@angular/core';
 import { Producto } from '../interfaces/producto';
+import { putUpdateProductoStock } from '../BDManagement/APIResquests';
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +8,8 @@ import { Producto } from '../interfaces/producto';
 export class CestaService {
 
   listaProductosCesta = signal<Producto[]>([]);
-  
+  pedidoRealizado = false;
+
   constructor() { }
 
   get productosCesta(): Signal<Producto[]> {
@@ -25,9 +27,27 @@ export class CestaService {
 
   }
 
+
+
   obtenerProductosCesta(): Signal<Producto[]> {
 
     return this.listaProductosCesta;
+
+  }
+
+  async restablecerStock(producto: Producto) {
+
+    console.log("Empieza la cuenta atrás de 10 minutos");
+
+    setTimeout(async () => {
+      if (!this.pedidoRealizado) {
+        let response = await putUpdateProductoStock(producto.id, producto.stock);
+        console.log("Stock restablecido después de 10 minutos: ", response);
+
+        //Vaciar array productos cesta
+        this.listaProductosCesta.set([]);      
+      }
+    }, 10 * 60 * 1000);
 
   }
 

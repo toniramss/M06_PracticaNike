@@ -5,6 +5,7 @@ import { ContenedorAdminComponent } from './components/contenedor-admin/contened
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { MisPedidosComponent } from './components/mis-pedidos/mis-pedidos.component';
+import { MiPerfilComponent } from './components/mi-perfil/mi-perfil.component';
 
 export const routes: Routes = [
     {path: 'home', component: HomeComponentComponent},
@@ -14,6 +15,7 @@ export const routes: Routes = [
 
     {path: 'productos', component: ContenedorProductosComponent},
     {path: 'admin', component: ContenedorAdminComponent},
-    {path: 'misPedidos', component: MisPedidosComponent}
+    {path: 'misPedidos', component: MisPedidosComponent},
+    {path: 'miPerfil', component: MiPerfilComponent}
 
 ];

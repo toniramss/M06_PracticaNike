@@ -58,6 +58,7 @@ export class ContenedorAdminComponent {
       descripcion: ['', [Validators.required, Validators.maxLength(500)]],
       tipoProducto: ['', Validators.required],
       oferta: [false, Validators.required],
+      stock: [0, Validators.required],
       imagen: ['', Validators.required],
 
 
@@ -152,6 +153,7 @@ export class ContenedorAdminComponent {
       imagenes: this.productForm.value.imagen,
       precio: this.productForm.value.precio,
       modelo: this.productForm.value.numReferencia,
+      stock: this.productForm.value.stock,
       oferta: this.productForm.value.oferta,
     };
 

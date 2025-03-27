@@ -1,6 +1,10 @@
 <div class="flex flex-col items-center justify-center p-10">
 
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-4">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-4 p-10 rounded-xl bg-gray-300">
+
+        <h1 class="w-full text-4xl text-center">Login</h1>
+
+        <img class="w-50" src="/images/nike.png">
 
         <mat-form-field>
             <mat-label>Email:</mat-label>
@@ -12,9 +16,11 @@
             <input type="password" formControlName="contrasenya" matInput required />
         </mat-form-field>
 
-        <button type="submit" class="border border-black px-4 py-2 rounded-full hover:bg-gray-300">
+        <button type="submit" class="border border-black px-4 py-2 rounded-full hover:bg-white">
             Login
         </button>
+
+        <label class="w-full text-center" routerLink="/register">No tengo cuenta</label>
 
 
 

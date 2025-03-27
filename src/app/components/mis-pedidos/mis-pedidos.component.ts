@@ -22,9 +22,11 @@ export class MisPedidosComponent implements OnInit {
 
   async ngOnInit() {
 
-    this.idUsuarioLogIn = Number(sessionStorage.getItem("idUsuario"));
+    this.idUsuarioLogIn = Number(sessionStorage.getItem("idUsuario") || 0);
     //this.pedidoService.loadPedidos();
     const listaPedidos = await getPedidos(this.idUsuarioLogIn);
+
+    console.log("idUsuarioLogin: ", this.idUsuarioLogIn);
 
     console.log("listaPedidos", listaPedidos);
 
@@ -33,12 +35,15 @@ export class MisPedidosComponent implements OnInit {
 
       const listaProductosPedido = await getProductosPedido(element.id);
 
+      console.log("listaProductosPedido: ", listaProductosPedido);
+
       const listaProductos: Producto[] = [];
 
       for (let i = 0; i < listaProductosPedido.length; i++) {
         const element = listaProductosPedido[i];
 
 
+        console.log("element.idProducto: ", element.idProducto);
         let producto = await getProductoId(element.idProducto);
 
         console.log("producto", producto);

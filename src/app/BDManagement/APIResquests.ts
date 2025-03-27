@@ -4,6 +4,8 @@ import { Register } from "../interfaces/register";
 import { PedidoApi } from "../interfaces/pedidosApi";
 import { PostPedidosApi } from "../interfaces/postPedidosApi";
 import { ProductoPedido } from "../interfaces/productoPedido";
+import { UpdateUsuario } from "../interfaces/updateUsuario";
+import { User } from "../interfaces/user";
 
 
 const API_URL = "http://localhost:3000/";
@@ -58,6 +60,58 @@ export async function postRegister(register: Register) {
     }
 }
 
+export async function getUserId(id: number) {
+
+    let user: User = {
+        id: 0,
+        nombre: "",
+        email: "",
+        telefono: "",
+        rol: ""
+    };
+
+    console.log("API URL: ", API_URL + 'getUser/' + id);
+    const response = await fetch(API_URL + 'getUser/' + id);
+
+    if (!response.ok) {
+        throw new Error('Error al obtener el usuario');
+    }
+
+    user = await response.json();
+
+    return user;
+
+}
+
+export async function putUpdateUsuario(id: Number, usuario: UpdateUsuario) {
+
+    try {
+        const response = await fetch(
+            API_URL + "modifyUser/" + id, {
+            method: "PUT",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(usuario)
+        }
+        );
+
+        if (!response.ok) {
+            throw new Error('Error al actualizar el producto');
+        }
+
+        console.log("Response: ", response);
+
+        const data = await response.json();
+        return data;
+
+    } catch (error) {
+        console.error('Error:', error);
+        throw error;
+    }
+
+}
+
 export async function getProductos() {
 
     let listProductos: Producto[] = [];
@@ -74,8 +128,7 @@ export async function getProductos() {
 
 }
 
-export async function getProductoId(id: Number) {
-
+export async function getProductoId(id: number) {
     let producto: Producto = {
         id: 0,
         nombre: "",
@@ -84,19 +137,29 @@ export async function getProductoId(id: Number) {
         imagenes: "",
         precio: 0,
         modelo: "",
+        stock: 0,
         oferta: false
     };
 
-    const response = await fetch(API_URL + 'getProducto/' + id);
+    try {
+        const response = await fetch(API_URL + 'getProducto/' + id);
 
-    if (!response.ok) {
-        throw new Error('Error al obtener los productos');
+        if (!response.ok) {
+            throw new Error(`Error HTTP: ${response.status} - ${response.statusText}`);
+        }
+
+        // Verifica si la respuesta tiene contenido antes de llamar a .json()
+        const text = await response.text();
+        if (!text) {
+            throw new Error("La respuesta de la API está vacía.");
+        }
+
+        producto = JSON.parse(text); // Parseamos manualmente para evitar errores de JSON vacío
+        return producto;
+    } catch (error) {
+        console.error("Error al obtener el producto:", error);
+        throw error;
     }
-
-    producto = await response.json();
-
-    return producto;
-
 }
 
 export async function postCreateProducto(producto: Producto) {

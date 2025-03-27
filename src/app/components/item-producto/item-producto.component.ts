@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Producto } from '../../interfaces/producto';
 import { CestaService } from '../../services/cesta.service';
-import { deleteProducto } from '../../BDManagement/APIResquests';
+import { deleteProducto, putUpdateProductoStock } from '../../BDManagement/APIResquests';
 import { ProductServiceService } from '../../services/product-service.service';
 
 @Component({
@@ -22,16 +22,27 @@ export class ItemProductoComponent {
     imagenes: "",
     precio: 0,
     modelo: "",
+    stock: 0,
     oferta: false,
   };
 
   constructor(private cestaService: CestaService, private productService: ProductServiceService) {}
 
-  addToCart(producto: Producto) {
+  async addToCart(producto: Producto) {
     console.log("Producto añadido al carrito");
 
     this.cestaService.agregarProductoACesta(producto);
 
+
+    let response = await putUpdateProductoStock(producto.id, producto.stock -1);
+
+    console.log("Response stock: ", response);
+
+    //Actualizar lista de productos
+    this.productService.loadProductos();  
+    
+    this.cestaService.pedidoRealizado = false;
+    this.cestaService.restablecerStock(producto);
 
 
   }

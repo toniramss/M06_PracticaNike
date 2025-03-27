@@ -5,6 +5,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { Producto } from '../../interfaces/producto';
 import { ProductServiceService } from '../../services/product-service.service';
 import { CestaService } from '../../services/cesta.service';
+import { postCreatePedido } from '../../BDManagement/APIResquests';
+import { PostPedidosApi } from '../../interfaces/postPedidosApi';
 
 @Component({
   selector: 'app-navbar-component',
@@ -14,8 +16,10 @@ import { CestaService } from '../../services/cesta.service';
 })
 export class NavbarComponentComponent {
 
-  tipoUsuarioIniciado = 'n';
-  //sessionStorage.getItem("tipoUsuario") || 'n';
+  //TODO: al iniciar sesion guardar en sessionStorage
+  //tipoUsuarioIniciado = 'n';
+  tipoUsuarioIniciado = sessionStorage.getItem("tipoUsuario") || 'n';
+  idUsuarioIniciado = Number(sessionStorage?.getItem("idUsuario")) || 1; //Number(sessionStorage.getItem("idUsuario"));
 
   mostrarDialogoCesta: Boolean = false;
   listaProductosCesta: Signal<Producto[]>;
@@ -46,6 +50,34 @@ export class NavbarComponentComponent {
     this.mostrarDialogoCesta = !this.mostrarDialogoCesta;
 
     console.log("Lista cesta: ", this.listaProductosCesta());
+  }
+
+  async tramitarPedido() {
+
+    console.log("Tramitar pedido");
+
+    let postPedidosApi: PostPedidosApi = {
+      idUsuario: this.idUsuarioIniciado,
+      productos: []
+    }
+
+    for (let i = 0; i < this.listaProductosCesta().length; i++) {
+      const element = this.listaProductosCesta()[i];
+
+      postPedidosApi.productos.push(element.id);
+      
+    }
+
+    console.log("Pedido preparado para enviar: ", postPedidosApi);
+
+    let response = await postCreatePedido(postPedidosApi);
+
+    console.log("Response createPedido: ", response);
+
+    this.cestaService.pedidoRealizado = true;
+
+    this.cestaService.listaProductosCesta.set([]);  
+
   }
 
 

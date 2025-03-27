@@ -16,10 +16,15 @@
                 <div class="flex flex-col gap-2">
                     @for (producto of pedido.listaProductos; track $index) {
 
-                    <div class="bg-gray-100 p-4 rounded-lg">
-                        <h2>Producto: {{ producto.nombre }}</h2>
-                        <p>Cantidad: {{ producto.modelo }}</p>
-                        <p>Precio: {{ producto.precio }} €</p>
+                    <div class=" flex flex-row bg-gray-100 p-4 rounded-lg gap-5 items-center">
+                        <img class="w-20 " [src]="producto.imagenes">
+
+                        <div>
+                            <h2><strong>Producto: {{ producto.nombre }}</strong></h2>
+                            <p>Referencia: {{ producto.modelo }}</p>
+                            <p>Precio: {{ producto.precio }} €</p>
+                        </div>
+
                     </div>
                     }
                 </div>

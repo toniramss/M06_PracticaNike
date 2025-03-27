@@ -1,0 +1,42 @@
+<div class="w-full flex flex-col p-10 ">
+
+    <h1 class="text-center text-2xl font-bold">Mi perfil</h1>
+
+    <br>
+
+    <form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-4">
+
+
+
+
+        <mat-form-field>
+            <mat-label>Nombre:</mat-label>
+            <input formControlName="nombrePerfilUsuario" matInput [value]="usuario.nombre" required />
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Enter your email</mat-label>
+            <input
+              matInput
+              placeholder="pat@example.com"
+              formControlName="email"
+              required
+              [value]="usuario.email"
+            />
+          </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Teléfono:</mat-label>
+            <input formControlName="telefono" matInput [value]="usuario.telefono" />
+        </mat-form-field>
+
+        <br>
+
+        <button type="submit" class="border border-black px-4 py-2 rounded-full hover:bg-gray-300">Guardar cambios</button>
+    
+
+    </form>
+
+
+
+</div>

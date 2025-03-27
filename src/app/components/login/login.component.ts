@@ -5,11 +5,12 @@ import { FormBuilder, FormGroup, FormControl, FormsModule, ReactiveFormsModule, 
 import { Login } from '../../interfaces/login';
 import { postLogin } from '../../BDManagement/APIResquests';
 import { Router } from '@angular/router';
+import { RouterLink } from '@angular/router';
 
 
 @Component({
   selector: 'app-login',
-  imports: [MatFormFieldModule, MatInputModule, FormsModule, ReactiveFormsModule],
+  imports: [MatFormFieldModule, MatInputModule, FormsModule, ReactiveFormsModule, RouterLink],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
   standalone: true
@@ -55,9 +56,12 @@ export class LoginComponent {
         console.log("Usuario normal");
       }
 
+
+
       sessionStorage.setItem("token", response.token);
       sessionStorage.setItem("user", response.user);
-      sessionStorage.setItem("idUsuario", response.user.idUsuario);
+      console.log("IdUsuario: ", response.user.idUser);
+      sessionStorage.setItem("idUsuario", response.user.idUser);
       sessionStorage.setItem("tipoUsuario", response.user.rol);
 
 
