@@ -157,6 +157,8 @@ export class ContenedorAdminComponent {
       oferta: this.productForm.value.oferta,
     };
 
+    console.log("Producto: ", producto);
+
     this.productService.agregarDato(producto);
 
   }

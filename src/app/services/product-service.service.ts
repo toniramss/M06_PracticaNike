@@ -1,7 +1,7 @@
 import { Injectable, Signal, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Producto } from '../interfaces/producto';
-import { getProductos } from '../BDManagement/APIResquests';
+import { getProductos, postCreateProducto } from '../BDManagement/APIResquests';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +24,8 @@ export class ProductServiceService {
     this.listaProductos.update(listaProductos => [...listaProductos, producto]);
     console.log("Producto agregado: ", this.listaProductos()[this.listaProductos().length - 1]);
 
+    const response = postCreateProducto(producto);
+    console.log("Response: ", response);
     console.log("Lista de productos: ", this.obtenerDatos()());
 
     alert("Producto añadido con éxito");

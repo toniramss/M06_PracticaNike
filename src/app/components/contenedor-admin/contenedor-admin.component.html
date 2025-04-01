@@ -58,14 +58,21 @@
 
             <p>Imagen del producto:</p>
 
-            <div class="flex flex-row gap-4 items-center">
+            <mat-form-field>
+                <mat-label>URL imagen:</mat-label>
+                <input type="url" formControlName="imagen" matInput placeholder="https://mi_imagen.jpg" required />
+            </mat-form-field>
+
+<!--             <input type="url" formControlName="imagen">
+ -->
+            <!-- <div class="flex flex-row gap-4 items-center">
                 @if (imagenPreview) {
                 <img class="w-50 h-34 object-contain border border-black" [src]="imagenPreview">
                 }
 
                 <input type="file" (change)="onFileSelected($event)"
                     class="h-10 border border-black px-4 py-2 rounded-full hover:bg-gray-300">
-                <input type="hidden" formControlName="imagen">
+                <input type="url" formControlName="imagen">
 
                 @if (subiendoImagen) {
                 <p>Subiendo imagen...</p>
@@ -74,7 +81,7 @@
                 <p>Imagen subida correctamente</p>
                 }
 
-            </div>
+            </div> -->
 
 
         </div>

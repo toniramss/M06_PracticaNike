@@ -23,6 +23,8 @@ export class ContenedorProductosComponent implements OnInit {
 
   ngOnInit() {
     this.productService.loadProductos();
+
+    console.log("Lista productos: ", this.listaProductos());
   }
 
   //listaProductos = ProductServiceService.obtenerDatos();

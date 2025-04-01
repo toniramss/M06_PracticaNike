@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { MisPedidosComponent } from './mis-pedidos.component';
+import { MisPedidosService } from '../../services/mis-pedidos.service';
 
 describe('MisPedidosComponent', () => {
   let component: MisPedidosComponent;
@@ -8,7 +9,8 @@ describe('MisPedidosComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MisPedidosComponent]
+      imports: [HttpClientTestingModule],
+      providers: [MisPedidosService, HttpClientTestingModule]
     })
     .compileComponents();
 

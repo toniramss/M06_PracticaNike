@@ -8,7 +8,8 @@ import { Producto } from '../../interfaces/producto';
   selector: 'app-mis-pedidos',
   imports: [],
   templateUrl: './mis-pedidos.component.html',
-  styleUrl: './mis-pedidos.component.css'
+  styleUrl: './mis-pedidos.component.css',
+  standalone: true
 })
 export class MisPedidosComponent implements OnInit {
 
