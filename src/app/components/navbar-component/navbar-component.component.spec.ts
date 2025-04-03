@@ -1,9 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ActivatedRoute } from '@angular/router';
 import { NavbarComponentComponent } from './navbar-component.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
+import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 
 describe('NavbarComponentComponent', () => {
   let component: NavbarComponentComponent;
@@ -13,10 +14,11 @@ describe('NavbarComponentComponent', () => {
     await TestBed.configureTestingModule({
       imports: [
         NavbarComponentComponent,
-        HttpClientTestingModule,
         RouterTestingModule
       ],
       providers: [
+        provideHttpClient(),
+        provideHttpClientTesting(),
         {
           provide: ActivatedRoute,
           useValue: {
