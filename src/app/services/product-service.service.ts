@@ -13,7 +13,7 @@ export class ProductServiceService {
   private listaProductos = signal<Producto[]>([]);
 
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   get productos(): Signal<Producto[]> {
     return this.listaProductos.asReadonly();
@@ -22,13 +22,17 @@ export class ProductServiceService {
   agregarDato(producto: Producto) {
 
     this.listaProductos.update(listaProductos => [...listaProductos, producto]);
-    console.log("Producto agregado: ", this.listaProductos()[this.listaProductos().length - 1]);
+    postCreateProducto(producto).then((nuevoProducto) => {
 
-    const response = postCreateProducto(producto);
-    console.log("Response: ", response);
-    console.log("Lista de productos: ", this.obtenerDatos()());
+      console.log("Producto añadido correctamente:", nuevoProducto);
+      alert("Producto añadido con éxito");
 
-    alert("Producto añadido con éxito");
+    }).catch((error) => {
+
+      console.error("Error al agregar producto:", error);
+      alert("Error al añadir producto");
+      
+    });
 
   }
 
@@ -56,7 +60,7 @@ export class ProductServiceService {
         // Actualizar la lista de productos después de eliminar
         this.listaProductos.update((productos) => productos.filter((producto) => producto.id !== id));
         console.log("Producto eliminado con éxito");
-  
+
         alert("Producto eliminado con éxito");
       },
       error: (error) => {
@@ -67,7 +71,7 @@ export class ProductServiceService {
   }
 
   restarStock() {
-    
+
 
   }
   restablecerStock() {
